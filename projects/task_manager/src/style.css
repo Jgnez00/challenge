@@ -1,0 +1,67 @@
+:root {
+    --text-color: #eef2ff;
+    --bg-color: #0a0c10;
+    --bg-color-card: #111418;
+    --border-color: #252a33;
+
+    --font: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue';
+}
+
+html {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font), sans-serif;
+}
+
+body {
+    box-sizing: border-box;
+    padding: 0;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 0.7rem;
+}
+
+.project {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.project-card {
+    border-radius:1.5rem;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: all 0.2s;
+}
+
+
+.card-header {
+    padding: 1.2rem 1.5rem;
+    background-color: #0f1217;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.card-header:hover {
+    background-color: #13171e;
+}
+
+.card-footer {
+    display: flex;
+    place-content: center;
+    padding: 1rem 1.5rem;
+}
+
+h1, h3 {
+    margin: 0
+}
