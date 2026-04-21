@@ -10,18 +10,51 @@ document.getElementById('app').innerHTML = `
 `;
 
 
-
-
-function el (tag, className, text) {
+function el (tag, className, text, event) {
     const el = document.createElement(tag);
-    if (className) el.classList.add(className);
+
+    if (className) {
+        const clases = Array.isArray(className) ? className : [className];
+        el.classList.add(...clases);
+    }
+
     if (text) el.textContent = text;
+    if (event) {
+        el.addEventListener('click', event);
+    }
     return el;
 }
 
 
+function createBody (project) {
+    const tasksContainer = el(
+        'div',
+    );
+
+    openProjects[project.id]
+        ? tasksContainer.className = 'tasks-container open'
+        : tasksContainer.className = 'tasks-container';
+
+    project.tasks.forEach(task => {
+        const taskDiv = el(
+            'div',
+            ['task-item', task.completed && 'completed'].filter(Boolean),
+            'prueba'
+        );
+
+        tasksContainer.append(taskDiv);
+    });
+
+    return tasksContainer;
+}
+
+
 function createHeader (project) {
-    const header = el('header', 'card-header');
+    const callback = (e) => {
+        openProjects[project.id] = !openProjects[project.id];
+        renderProjects(project_lists, projects);
+    }
+    const header = el('header', 'card-header', null, callback);
     const icon = el('span', null, 'icon');
 
     const info = el('div');
@@ -38,18 +71,19 @@ function createFooter (project) {
     return el(
         'footer',
         'card-footer',
-        `${project.completed || 0} of ${project.tasks.length} tasks completed`);
+        `${project.completed || 0} of ${project.totalTasks} tasks completed`);
 }
 
 
 function createCard (project) {
     const li = el('li', 'card');
-    li.append(createHeader(project), createFooter(project));
+    li.append(createHeader(project), createBody(project), createFooter(project));
     return li;
 }
 
 
 function renderProjects (list_elements, projects) {
+    list_elements.innerHTML = '';
     const fragment = document.createDocumentFragment();
 
     projects.forEach(project => {
@@ -57,7 +91,13 @@ function renderProjects (list_elements, projects) {
     });
 
     list_elements.appendChild(fragment);
+    console.log(openProjects)
 }
 
+
 const project_lists = document.getElementById('projects');
+let openProjects = Object.fromEntries(
+    projects.map(p => [p.id, false])
+);
+
 renderProjects(project_lists, projects);

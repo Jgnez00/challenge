@@ -21,6 +21,16 @@ body {
     margin: 0 auto
 }
 
+h1, h3 {
+    margin: 0
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -61,12 +71,29 @@ body {
     padding: 1rem 1.5rem;
 }
 
-h1, h3 {
-    margin: 0
+.tasks-container {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-6px);
+
+    transition: opacity 0.2s ease, max-height 0.35s, transform 0.25s ease;
+    transition-delay: 2s;
 }
 
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.tasks-container.open {
+    opacity: 1;
+    max-height: 1000px;
+    transform: translateY(0);
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.task-item.completed {
+    color: #6a7a95;
 }
