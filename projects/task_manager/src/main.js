@@ -27,7 +27,38 @@ function el (tag, className, text, event) {
 }
 
 
+function createInput (tag, type, className, task) {
+    const input = document.createElement(tag);
+    if (type && task.completed !== null) {
+        input.type = type;
+        input.checked = task.completed;
+    }
+    input.className = className;
+    input.addEventListener('click', (e) => {
+        task.completed = e.target.checked;
+        renderProjects(project_lists, projects);
+    });
+    return input;
+}
+
+
+function createTasks (task) {
+    const div = el(
+        'div',
+        ['task-item', task.completed ? 'completed' : ''].filter(Boolean)
+    )
+
+    div.append(
+        createInput('input', 'checkbox', 'task-check', task),
+        el('h4', null, task.name)
+    );
+
+    return div;
+}
+
+
 function createBody (project) {
+    const fragment = document.createDocumentFragment();
     const tasksContainer = el(
         'div',
     );
@@ -36,16 +67,11 @@ function createBody (project) {
         ? tasksContainer.className = 'tasks-container open'
         : tasksContainer.className = 'tasks-container';
 
-    project.tasks.forEach(task => {
-        const taskDiv = el(
-            'div',
-            ['task-item', task.completed && 'completed'].filter(Boolean),
-            'prueba'
-        );
-
-        tasksContainer.append(taskDiv);
+    project.tasks.forEach(t => {
+        fragment.appendChild(createTasks(t));
     });
 
+    tasksContainer.append(fragment);
     return tasksContainer;
 }
 
@@ -97,7 +123,6 @@ function renderProjects (list_elements, projects) {
     });
 
     list_elements.appendChild(fragment);
-    console.log(openProjects)
 }
 
 

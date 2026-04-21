@@ -21,7 +21,7 @@ body {
     margin: 0 auto
 }
 
-h1, h3 {
+h1, h3, h4 {
     margin: 0
 }
 
@@ -55,6 +55,7 @@ ul {
 .card-header {
     padding: 1.2rem 1.5rem;
     background-color: #0f1217;
+    border-bottom: 1px solid var(--border-color);
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -103,6 +104,36 @@ ul {
     border-bottom: 1px solid var(--border-color);
 }
 
+.task-item:hover {
+    background-color: #1a1f26;
+}
+
 .task-item.completed {
     color: #6a7a95;
 }
+
+.task-check {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: #1e242c;
+    border-radius: 0.3rem;
+    border: 1px solid #3b4252;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-check:checked {
+    background: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.task-item.completed {
+    text-decoration: line-through;
+    color: #6a7a95;
+}
+
+
