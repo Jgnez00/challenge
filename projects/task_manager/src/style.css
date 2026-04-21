@@ -136,4 +136,16 @@ ul {
     color: #6a7a95;
 }
 
+.priority-tag {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    background: #1e2a3a;
+    color: #b9d0f0;
+    margin-left: auto;
+}
+
+.priority-tag.low { background: #255125; color: #b8f0b8; }
+.priority-tag.medium { background: #434315; color: #ffea9e; }
+.priority-tag.high { background: #550a23; color: #ffaeae; }
 

@@ -13,7 +13,7 @@ document.getElementById('app').innerHTML = `
 
 function el (tag, className, text, event) {
     const el = document.createElement(tag);
-
+    console.log(className)
     if (className) {
         const clases = Array.isArray(className) ? className : [className];
         el.classList.add(...clases);
@@ -47,10 +47,12 @@ function createTasks (task) {
         'div',
         ['task-item', task.completed ? 'completed' : ''].filter(Boolean)
     )
+    const badge = el('span', )
 
     div.append(
         createInput('input', 'checkbox', 'task-check', task),
-        el('h4', null, task.name)
+        el('h4', null, task.name),
+        el('span', ['priority-tag', task.priority], task.priority)
     );
 
     return div;
