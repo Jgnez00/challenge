@@ -1,5 +1,6 @@
 import './style.css';
 import { projects } from './mocks.js';
+import { caretRight } from "./icono.js";
 
 
 document.getElementById('app').innerHTML = `
@@ -55,7 +56,12 @@ function createHeader (project) {
         renderProjects(project_lists, projects);
     }
     const header = el('header', 'card-header', null, callback);
-    const icon = el('span', null, 'icon');
+    const icon = el('i');
+
+    icon.innerHTML = caretRight();
+    openProjects[project.id]
+        ? icon.className = 'icon open'
+        : icon.className = 'icon'
 
     const info = el('div');
     const title = el('h3', null, project.name);

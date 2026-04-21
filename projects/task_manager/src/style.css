@@ -65,6 +65,15 @@ ul {
     background-color: #13171e;
 }
 
+.icon {
+    transition: transform 0.3s ease;
+    transform-origin: center;
+}
+
+.icon.open {
+    transform: rotate(90deg);
+}
+
 .card-footer {
     display: flex;
     place-content: center;
